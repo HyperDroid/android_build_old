@@ -1049,13 +1049,14 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTATOOLS)
            -k $(KEY_CERT_PAIR) \
            $(BUILT_TARGET_FILES_PACKAGE) $@
 
-.PHONY: otapackage redux
+.PHONY: otapackage hyperdroid
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 
-redux: otapackage
+hyperdroid: otapackage
+	./vendor/hyperdroid/tools/leoupdate
 	$(hide) \
 	  WANT_SQUASHFS=$(WANT_SQUASHFS) \
-		./vendor/redux/tools/squisher
+		./vendor/hyperdroid/tools/squisher
 
 # -----------------------------------------------------------------
 # The update package
